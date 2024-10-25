@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+<!---->
+
+{% block main %}
+<div class="flex flex-col h-screen justify-between">
+  <div
+    id="chat-section"
+    class="grow flex flex-col w-full items-center overflow-x-hidden overflow-y-scroll after:pointer-events-none after:absolute after:left-0 after:top-0 after:z-10 after:block after:h-full after:w-full after:[background:linear-gradient(0deg,var(--default-bg)_0,var(--default-bg)_9rem,#0000_14rem)]"
+    style="
+      --default-bg: var(--fallback-b3, oklch(var(--b3) / var(--tw-bg-opacity)));
+    "
+  >
+    <div class="min-h-20 w-full"></div>
+
+    <div id="chat-container" class="w-full max-w-5xl prose space-y-4"></div>
+
+    <div class="min-h-20 w-full"></div>
+  </div>
+
+  <div class="flex justify-center h-36 p-8 z-50">
+    <div class="card bg-base-100 w-full max-w-2xl shadow-xl">
+      <form id="message-form" class="card-body flex-row p-4 [&>*]:inline-block">
+        <input
+          id="message-input"
+          name="message"
+          type="text"
+          placeholder="Type here..."
+          class="input w-full bg-base-300"
+          autocomplete="off"
+        />
+
+        <button id="message-send" class="btn btn-neutral" type="submit">
+          Send
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+{%endblock %}

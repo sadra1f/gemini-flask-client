@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Gemini API Chatbot</title>
+
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='font/inter/index.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='font/vazirmatn/index.css') }}"
+    />
+
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style/main.css') }}"
+    />
+  </head>
+  <body>
+    <main class="flex flex-col h-full min-h-screen w-full">
+      {% block main %}{% endblock %}
+    </main>
+
+    <script src="{{ url_for('static', filename='javascript/main.js') }}"></script>
+  </body>
+</html>

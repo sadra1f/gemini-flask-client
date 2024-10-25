@@ -1,0 +1,22 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+flask = "==3.0.3"
+google-generativeai = "==0.8.3"
+
+[dev-packages]
+black = "*"
+isort = "*"
+
+[requires]
+python_version = "3.11"
+
+[scripts]
+serve = "flask run --debug --port 8000"
+dev = "python scripts/dev.py"
+build = "python scripts/build.py"
+black = "python -m black ."
+isort = "python -m isort ."

@@ -1,0 +1,14 @@
+[
+  {
+    "role": "user",
+    "parts": [
+      "Only answer the questions if they are about programming. If the question is not about programming tell the user that you can only answer the questions about programming."
+    ]
+  },
+  {
+    "role": "model",
+    "parts": [
+      "Okay, I understand. I will only answer questions about programming. If you ask me something else, I will let you know that I can only answer programming-related questions. 😊 \n"
+    ]
+  }
+]
