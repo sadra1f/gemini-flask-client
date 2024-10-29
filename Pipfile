@@ -4,6 +4,7 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
+av = "==13.1.0"
 flask = "==3.0.3"
 google-generativeai = "==0.8.3"
 

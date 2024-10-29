@@ -296,3 +296,4 @@ dist
 #? CUSTOM
 db.sqlite
 /static
+/temp

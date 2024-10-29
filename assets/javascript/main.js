@@ -34,9 +34,49 @@ function scrollChatToBottom() {
 
 audioMessageRecord.addEventListener("click", (event) => {
   if (isRecording) {
+    messageInput.setAttribute("disabled", true);
+    messageSend.setAttribute("disabled", true);
+
     audioMessageRecord.classList.remove("!btn-error", "!bg-error");
     audioRecorder.save().then((value) => {
-      console.log(value);
+      const fileName = "voice.webm";
+      const formData = new FormData();
+      const file = new File([value], fileName);
+
+      formData.append("file", file, fileName);
+
+      axios
+        .post("/send-voice", formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            timeout: 60000,
+          },
+        })
+        .then((response) => {
+          const converter = new Converter();
+
+          chatContainer.insertAdjacentHTML(
+            "beforeend",
+            chatBubbleBot(converter.makeHtml(response.data.message))
+          );
+          scrollChatToBottom();
+        })
+        .catch((reason) => {
+          let message = reason.response?.data?.detail;
+          if (!message) message = reason.message;
+          if (!message) message = JSON.stringify(reason);
+          alert(message);
+        })
+        .finally(() => {
+          messageInput.removeAttribute("disabled");
+          messageSend.removeAttribute("disabled");
+        });
+
+      chatContainer.insertAdjacentHTML(
+        "beforeend",
+        chatBubbleUser("[Audio File]")
+      );
+      scrollChatToBottom();
     });
   } else {
     audioMessageRecord.classList.add("!btn-error", "!bg-error");
@@ -65,7 +105,7 @@ messageForm.addEventListener("submit", (event) => {
     messageSend.setAttribute("disabled", "true");
 
     axios
-      .post("/send-message", { message: message }, { timeout: 5000 })
+      .post("/send-message", { message: message }, { timeout: 60000 })
       .then((response) => {
         const converter = new Converter();
 
