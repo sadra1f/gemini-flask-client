@@ -22,7 +22,9 @@ export default [
     output: {
       file: `${outputDir}/${filename}`,
       format: "iife",
-      name: filename.replace(/\.[^/.]+$/, ""), // Remove file extensionF
+      name: filename
+        .replace(/\.[^/.]+$/, "") // Remove file extensionF
+        .replaceAll(/ |-/g, "_"),
     },
     plugins: [
       nodeResolve({ browser: true }), //
