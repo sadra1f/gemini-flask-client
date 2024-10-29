@@ -1,11 +1,16 @@
 import axios from "axios";
 import { Converter } from "showdown";
 
+const audioRecorder = new audio_recorder.AudioRecorder();
+
 const messageForm = document.querySelector("#message-form");
 const chatSection = document.querySelector("#chat-section");
 const chatContainer = document.querySelector("#chat-container");
+const audioMessageRecord = document.querySelector("#audio-message-record");
 const messageInput = document.querySelector("#message-input");
 const messageSend = document.querySelector("#message-send");
+
+let isRecording = false;
 
 function chatBubbleUser(message) {
   return `
@@ -26,6 +31,22 @@ function chatBubbleBot(message) {
 function scrollChatToBottom() {
   chatSection.scrollTop = chatSection.scrollHeight;
 }
+
+audioMessageRecord.addEventListener("click", (event) => {
+  if (isRecording) {
+    audioMessageRecord.classList.remove("!btn-error", "!bg-error");
+    audioRecorder.save().then((value) => {
+      console.log(value);
+    });
+  } else {
+    audioMessageRecord.classList.add("!btn-error", "!bg-error");
+    audioRecorder.init().then(() => {
+      audioRecorder.start();
+    });
+  }
+
+  isRecording = !isRecording;
+});
 
 messageForm.addEventListener("submit", (event) => {
   event.preventDefault();
@@ -66,3 +87,7 @@ messageForm.addEventListener("submit", (event) => {
       });
   }
 });
+
+if (!navigator.mediaDevices.getUserMedia) {
+  audioMessageRecord.parentElement.classList.add("hidden");
+}
