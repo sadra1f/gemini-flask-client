@@ -44,7 +44,7 @@ messageForm.addEventListener("submit", (event) => {
     messageSend.setAttribute("disabled", "true");
 
     axios
-      .post("/send-message", { message: message }, { timeout: 5000 })
+      .post("/send-message", { message: message }, { timeout: 60 * 1000 })
       .then((response) => {
         const converter = new Converter();
 
